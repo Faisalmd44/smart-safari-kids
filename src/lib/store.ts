@@ -31,8 +31,9 @@ interface Store {
   loading: boolean;
   error: string | null;
   loadPlayer: () => Promise<void>;
-  createPlayer: (name: string, avatar: string) => Promise<void>;
+  createPlayer: (name: string, avatar: string, currentClass: number) => Promise<void>;
   updateProfile: (updates: Partial<Pick<PlayerState, 'player_name' | 'avatar' | 'current_class' | 'screen_time_limit_minutes'>>) => Promise<void>;
+  resetPlayer: () => Promise<void>;
   addRewards: (rewards: { stars?: number; coins?: number; gems?: number; trophies?: number; xp?: number; stickers?: string[] }) => Promise<void>;
   unlockWorld: (worldId: string) => Promise<void>;
   completeLevel: (worldId: string, levelNum: number, stars: number, subject: string, correct: number, total: number, bossDefeated: boolean) => Promise<void>;
@@ -103,7 +104,7 @@ export const usePlayerStore = create<Store>((set, get) => ({
     }
   },
 
-  createPlayer: async (name, avatar) => {
+  createPlayer: async (name, avatar, currentClass) => {
     const deviceId = getDeviceId();
     const today = new Date().toISOString().slice(0, 10);
     const { data, error } = await supabase
@@ -112,6 +113,7 @@ export const usePlayerStore = create<Store>((set, get) => ({
         device_id: deviceId,
         player_name: name,
         avatar,
+        current_class: currentClass,
         streak: 1,
         last_played_date: today,
         last_screen_reset: today,
@@ -125,6 +127,14 @@ export const usePlayerStore = create<Store>((set, get) => ({
       return;
     }
     set({ player: data as PlayerState });
+  },
+
+  resetPlayer: async () => {
+    const { player } = get();
+    if (!player) return;
+    await supabase.from('attempts').delete().eq('device_id', player.device_id);
+    await supabase.from('players').delete().eq('device_id', player.device_id);
+    set({ player: null });
   },
 
   updateProfile: async (updates) => {

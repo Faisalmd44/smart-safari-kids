@@ -15,18 +15,18 @@ const STORY_SLIDES = [
     emoji: '💎',
     title: 'The Knowledge Crystals',
     text: 'For centuries, magical Knowledge Crystals kept the island wise and peaceful. Every animal learned from them.',
-    bg: 'from-amber-400 via-orange-500 to-red-600',
+    bg: 'from-amber-400 via-orange-500 to-pink-600',
   },
   {
-    emoji: '👹',
-    title: 'The Shadow Hunter Strikes!',
-    text: 'One dark night, the evil Shadow Hunter stole all the crystals! The animals started forgetting everything...',
-    bg: 'from-gray-600 via-gray-800 to-gray-900',
+    emoji: '⛈️',
+    title: 'The Stormy Cloud Awakens!',
+    text: 'One swirling night, a playful purple storm cloud swept across the sky and hid all the crystals! Now the animals need help finding them again.',
+    bg: 'from-indigo-400 via-purple-500 to-indigo-800',
   },
   {
     emoji: '🗺️',
     title: 'Your Adventure Begins!',
-    text: 'Join Leo the Lion and his brave friends! Travel across 8 amazing worlds, recover the crystals, and save Safari Island!',
+    text: 'Join Leo Lion and his brave friends! Travel across 8 amazing worlds, find the glowing crystals, and bring the sparkle back to Safari Island!',
     bg: 'from-blue-400 via-blue-600 to-indigo-800',
   },
 ];
@@ -36,13 +36,13 @@ export default function IntroScreen() {
   const { player } = usePlayerStore();
   const [slide, setSlide] = useState(0);
 
-  // If player already exists, skip to home
+  const current = STORY_SLIDES[slide];
+  const isLast = slide === STORY_SLIDES.length - 1;
+
+  // If a player profile loads after we mounted, go home instead of showing intro.
   useEffect(() => {
     if (player) navigate('/home', { replace: true });
   }, [player, navigate]);
-
-  const current = STORY_SLIDES[slide];
-  const isLast = slide === STORY_SLIDES.length - 1;
 
   const next = () => {
     sound.play('whoosh');

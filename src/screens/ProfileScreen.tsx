@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, Star, Coins, Gem, Trophy, Zap, Award, Lock, Settings, BookOpen, TrendingUp } from 'lucide-react';
+import { ChevronLeft, Star, Coins, Gem, Trophy, Zap, Award, Lock, Settings, BookOpen, TrendingUp, RotateCcw } from 'lucide-react';
 import { usePlayerStore } from '../lib/store';
-import { CHARACTERS, STICKERS, BADGES, WORLDS, getTotalLevels } from '../lib/gameData';
+import { AVATARS, CHARACTERS, STICKERS, BADGES, WORLDS, getTotalLevels } from '../lib/gameData';
 import { sound } from '../lib/sound';
 import AnimatedBackground from '../components/AnimatedBackground';
 import { BottomNav } from './HomeScreen';
@@ -10,13 +10,15 @@ import { useState } from 'react';
 
 export default function ProfileScreen() {
   const navigate = useNavigate();
-  const { player, updateProfile } = usePlayerStore();
+  const { player, updateProfile, resetPlayer } = usePlayerStore();
   const [tab, setTab] = useState<'overview' | 'stickers' | 'badges'>('overview');
+  const [confirmReset, setConfirmReset] = useState(false);
+  const [resetting, setResetting] = useState(false);
   if (!player) return null;
 
   const totalLevels = getTotalLevels();
   const completedLevels = player.unlocked_levels.length;
-  const avatarEmoji = CHARACTERS.find((c) => c.id === player.avatar)?.emoji || '🦁';
+  const avatarEmoji = AVATARS.find((c) => c.id === player.avatar)?.emoji || '🦁';
 
   return (
     <AnimatedBackground gradient={['#607D8B', '#455A64', '#263238']} variant="clouds">
@@ -187,6 +189,42 @@ export default function ProfileScreen() {
               </button>
             ))}
           </div>
+        </div>
+
+        {/* Reset Profile */}
+        <div className="glass rounded-2xl p-4 mt-6">
+          <h3 className="text-white font-bold mb-3 flex items-center gap-2"><RotateCcw size={18} color="#FF6F61" /> Reset Profile</h3>
+          <p className="text-white/70 text-sm font-semibold mb-3">This will erase your explorer and all progress. You will see the Create Explorer screen again.</p>
+          {!confirmReset ? (
+            <button
+              onClick={() => { sound.play('tap'); setConfirmReset(true); }}
+              className="w-full py-3 rounded-xl bg-red-500/80 text-white font-bold border border-red-300/30"
+            >
+              Reset My Profile
+            </button>
+          ) : (
+            <div className="flex gap-3">
+              <button
+                onClick={() => { sound.play('tap'); setConfirmReset(false); }}
+                disabled={resetting}
+                className="flex-1 py-3 rounded-xl bg-white/20 text-white font-bold"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={async () => {
+                  setResetting(true);
+                  sound.play('whoosh');
+                  await resetPlayer();
+                  navigate('/', { replace: true });
+                }}
+                disabled={resetting}
+                className="flex-1 py-3 rounded-xl bg-red-500 text-white font-bold disabled:opacity-60"
+              >
+                {resetting ? 'Resetting...' : 'Yes, Reset Everything'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <BottomNav active="profile" />

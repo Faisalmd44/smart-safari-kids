@@ -105,7 +105,7 @@ export const WORLDS: World[] = [
     description: 'Roam the wild African plains!',
     gradient: ['#FFB74D', '#FF9800', '#E65100'],
     bgGradient: ['#FFCC80', '#FFA726', '#EF6C00'],
-    boss: { name: 'Shadow Hunter', emoji: '🦁' },
+    boss: { name: 'Storm Guardian', emoji: '⛈️' },
     levelsPerDifficulty: 42,
     premium: false,
     storyChapter: 6,
@@ -137,17 +137,24 @@ export const WORLDS: World[] = [
 ];
 
 export const CHARACTERS: Character[] = [
-  { id: 'leo', name: 'Leo the Lion', emoji: '🦁', role: 'Brave Leader', color: '#FFB300' },
-  { id: 'milo', name: 'Milo the Monkey', emoji: '🐵', role: 'Clever Climber', color: '#8D6E63' },
-  { id: 'polly', name: 'Polly the Parrot', emoji: '🦜', role: 'Word Wizard', color: '#43A047' },
-  { id: 'ellie', name: 'Ellie the Elephant', emoji: '🐘', role: 'Memory Master', color: '#1976D2' },
-  { id: 'penny', name: 'Penny the Panda', emoji: '🐼', role: 'Peaceful Puzzler', color: '#37474F' },
-  { id: 'finn', name: 'Finn the Fox', emoji: '🦊', role: 'Quick Thinker', color: '#FF5722' },
-  { id: 'ruby', name: 'Ruby the Rabbit', emoji: '🐰', role: 'Speedy Solver', color: '#EC407A' },
-  { id: 'hoot', name: 'Hoot the Owl', emoji: '🦉', role: 'Wise Guide', color: '#5D4037' },
+  { id: 'leo', name: 'Leo Lion', emoji: '🦁', role: 'Brave Leader', color: '#FFB300' },
+  { id: 'milo', name: 'Milo Monkey', emoji: '🐵', role: 'Clever Climber', color: '#8D6E63' },
+  { id: 'polly', name: 'Polly Parrot', emoji: '🦜', role: 'Word Wizard', color: '#43A047' },
+  { id: 'ellie', name: 'Ellie Elephant', emoji: '🐘', role: 'Memory Master', color: '#1976D2' },
+  { id: 'penny', name: 'Penny Panda', emoji: '🐼', role: 'Peaceful Puzzler', color: '#37474F' },
+  { id: 'finn', name: 'Finn Fox', emoji: '🦊', role: 'Quick Thinker', color: '#FF5722' },
+  { id: 'ruby', name: 'Ruby Rabbit', emoji: '🐰', role: 'Speedy Solver', color: '#EC407A' },
+  { id: 'hoot', name: 'Hoot Owl', emoji: '🦉', role: 'Wise Guide', color: '#5D4037' },
 ];
 
-export const AVATARS = CHARACTERS.slice(0, 6).map((c) => ({ id: c.id, emoji: c.emoji, name: c.name }));
+export const AVATARS = [
+  { id: 'leo', emoji: '🦁', name: 'Leo' },
+  { id: 'milo', emoji: '🐵', name: 'Milo' },
+  { id: 'rio', emoji: '🦜', name: 'Rio' },
+  { id: 'ellie', emoji: '🐘', name: 'Ellie' },
+  { id: 'panda', emoji: '🐼', name: 'Panda' },
+  { id: 'foxy', emoji: '🦊', name: 'Foxy' },
+];
 
 export const STICKERS = [
   '🦁','🐵','🦜','🐘','🐼','🦊','🐰','🦉','🐯','🦒',
@@ -180,12 +187,12 @@ export const STORY_CHAPTERS = [
   {
     chapter: 1,
     title: 'The Knowledge Crystals',
-    text: 'Welcome to Safari Island! It was a peaceful home for all the animals... until the evil Shadow Hunter stole the magical Knowledge Crystals! Without them, the animals have forgotten everything they knew.',
+    text: 'Welcome to Safari Island! It was a peaceful home for all the animals... until a playful purple storm cloud swept across the sky and hid the magical Knowledge Crystals! Without them, the animals have forgotten everything they knew.',
   },
   {
     chapter: 2,
     title: 'The Journey Begins',
-    text: 'Leo the Lion has gathered his bravest friends. Together, you must travel across 8 incredible worlds — from the deep jungle to outer space — to recover every crystal and restore wisdom to the island!',
+    text: 'Leo Lion has gathered his bravest friends. Together, you must travel across 8 incredible worlds — from the deep jungle to outer space — to find every glowing crystal and bring wisdom back to the island!',
   },
   {
     chapter: 3,
@@ -210,7 +217,7 @@ export const STORY_CHAPTERS = [
   {
     chapter: 7,
     title: 'The Great Savanna',
-    text: 'You\'re almost at the final challenge! The Shadow Hunter himself lurks in the savanna. This is where he stole the crystals — it\'s time to take them back!',
+    text: 'You\'re almost at the final challenge! A swirling purple cloud waits in the savanna, keeping the crystals safe. This is where the cloud hid them — it\'s time to find them all!',
   },
   {
     chapter: 8,

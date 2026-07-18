@@ -42,7 +42,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={player ? <Navigate to="/home" replace /> : <IntroScreen />} />
-      <Route path="/onboarding" element={<OnboardingScreen />} />
+      <Route path="/onboarding" element={player ? <Navigate to="/home" replace /> : <OnboardingScreen />} />
       <Route path="/home" element={player ? <HomeScreen /> : <Navigate to="/" replace />} />
       <Route path="/map" element={player ? <WorldMapScreen /> : <Navigate to="/" replace />} />
       <Route path="/world/:id" element={player ? <WorldDetailScreen /> : <Navigate to="/" replace />} />
