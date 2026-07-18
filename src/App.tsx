@@ -12,6 +12,7 @@ import ProfileScreen from './screens/ProfileScreen';
 import StoryScreen from './screens/StoryScreen';
 import AITutorScreen from './screens/AITutorScreen';
 import LeaderboardScreen from './screens/LeaderboardScreen';
+import ParentDashboardScreen from './screens/ParentDashboardScreen';
 import LoadingScreen from './components/LoadingScreen';
 
 export default function App() {
@@ -50,6 +51,7 @@ export default function App() {
       <Route path="/story/:chapter" element={player ? <StoryScreen /> : <Navigate to="/" replace />} />
       <Route path="/tutor" element={player ? <AITutorScreen /> : <Navigate to="/" replace />} />
       <Route path="/leaderboard" element={player ? <LeaderboardScreen /> : <Navigate to="/" replace />} />
+      <Route path="/parent" element={player ? <ParentDashboardScreen /> : <Navigate to="/" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Star, Coins, Gem, Trophy, Zap, Map, User, Play, BookOpen, Calendar, ChevronRight, Crown } from 'lucide-react';
+import { Star, Coins, Gem, Trophy, Zap, Map, User, Play, BookOpen, Calendar, ChevronRight, Crown, Award } from 'lucide-react';
 import { usePlayerStore } from '../lib/store';
 import { CHARACTERS, WORLDS, AVATARS } from '../lib/gameData';
 import { sound } from '../lib/sound';
@@ -122,6 +122,24 @@ export default function HomeScreen() {
             <div className="flex-1 text-left">
               <p className="text-white font-bold text-base">Leaderboard</p>
               <p className="text-white/90 text-sm font-semibold">See how you rank against explorers!</p>
+            </div>
+            <ChevronRight color="white" size={24} />
+          </div>
+        </motion.button>
+
+        {/* Parent Dashboard Banner */}
+        <motion.button
+          whileTap={{ scale: 0.97 }}
+          onClick={() => { sound.play('whoosh'); navigate('/parent'); }}
+          className="w-full mb-6"
+        >
+          <div className="bg-gradient-to-r from-violet-600 to-indigo-700 rounded-2xl p-4 flex items-center gap-3 shadow-xl border border-white/20">
+            <div className="w-12 h-12 rounded-full bg-white/25 border-2 border-white/40 flex items-center justify-center">
+              <Award size={26} color="white" />
+            </div>
+            <div className="flex-1 text-left">
+              <p className="text-white font-bold text-base">Parent Dashboard</p>
+              <p className="text-white/90 text-sm font-semibold">Track progress &amp; reports</p>
             </div>
             <ChevronRight color="white" size={24} />
           </div>
