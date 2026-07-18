@@ -95,6 +95,26 @@ class SoundManager {
       this.musicTimer = null;
     }
   }
+
+  speak(text: string) {
+    if (this.muted) return;
+    if (typeof window === 'undefined' || !window.speechSynthesis) return;
+    window.speechSynthesis.cancel();
+    const u = new SpeechSynthesisUtterance(text);
+    u.rate = 0.85;
+    u.pitch = 1.1;
+    u.volume = 0.9;
+    const voices = window.speechSynthesis.getVoices();
+    const en = voices.find((v) => v.lang.startsWith('en'));
+    if (en) u.voice = en;
+    window.speechSynthesis.speak(u);
+  }
+
+  stopSpeaking() {
+    if (typeof window !== 'undefined' && window.speechSynthesis) {
+      window.speechSynthesis.cancel();
+    }
+  }
 }
 
 export const sound = new SoundManager();

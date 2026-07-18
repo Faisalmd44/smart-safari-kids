@@ -10,6 +10,7 @@ import WorldDetailScreen from './screens/WorldDetailScreen';
 import QuizScreen from './screens/QuizScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import StoryScreen from './screens/StoryScreen';
+import AITutorScreen from './screens/AITutorScreen';
 import LoadingScreen from './components/LoadingScreen';
 
 export default function App() {
@@ -46,6 +47,7 @@ export default function App() {
       <Route path="/quiz/:worldId/:levelNum" element={player ? <QuizScreen /> : <Navigate to="/" replace />} />
       <Route path="/profile" element={player ? <ProfileScreen /> : <Navigate to="/" replace />} />
       <Route path="/story/:chapter" element={player ? <StoryScreen /> : <Navigate to="/" replace />} />
+      <Route path="/tutor" element={player ? <AITutorScreen /> : <Navigate to="/" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
