@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
-import { Star, Coins, Gem, Trophy, Zap, Map, User, Play, BookOpen, Calendar, ChevronRight } from 'lucide-react';
+import { Star, Coins, Gem, Trophy, Zap, Map, User, Play, BookOpen, Calendar, ChevronRight, Crown } from 'lucide-react';
 import { usePlayerStore } from '../lib/store';
 import { CHARACTERS, WORLDS, AVATARS } from '../lib/gameData';
 import { sound } from '../lib/sound';
@@ -108,6 +108,24 @@ export default function HomeScreen() {
             </div>
           </motion.button>
         )}
+
+        {/* Leaderboard Banner */}
+        <motion.button
+          whileTap={{ scale: 0.97 }}
+          onClick={() => { sound.play('whoosh'); navigate('/leaderboard'); }}
+          className="w-full mb-6"
+        >
+          <div className="bg-gradient-to-r from-indigo-500 to-blue-600 rounded-2xl p-4 flex items-center gap-3 shadow-xl border border-white/20">
+            <div className="w-12 h-12 rounded-full bg-white/25 border-2 border-white/40 flex items-center justify-center">
+              <Trophy size={26} color="#FFD54F" fill="#FFD54F" />
+            </div>
+            <div className="flex-1 text-left">
+              <p className="text-white font-bold text-base">Leaderboard</p>
+              <p className="text-white/90 text-sm font-semibold">See how you rank against explorers!</p>
+            </div>
+            <ChevronRight color="white" size={24} />
+          </div>
+        </motion.button>
 
         {/* Quick Actions */}
         <div className="grid grid-cols-2 gap-3 mb-6">
